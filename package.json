@@ -1,0 +1,68 @@
+{
+  "name": "@musterd/whiteboard",
+  "version": "0.1.0",
+  "description": "A shared whiteboard for a human and an agent to brainstorm on: the person draws in the browser, the agent draws and reads through MCP tools, both see every change live.",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SandRiseStudio/musterd-whiteboard.git"
+  },
+  "homepage": "https://github.com/SandRiseStudio/musterd-whiteboard#readme",
+  "keywords": [
+    "mcp",
+    "whiteboard",
+    "tldraw",
+    "agents",
+    "brainstorm",
+    "claude-code",
+    "codex",
+    "cursor"
+  ],
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "bin": {
+    "whiteboard": "./dist/mcp/index.js",
+    "agent-whiteboard-mcp": "./dist/mcp/index.js",
+    "agent-whiteboard-service": "./dist/service.js"
+  },
+  "files": [
+    "dist",
+    "dist-web",
+    "SKILL.md"
+  ],
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && vite build",
+    "dev:service": "tsx src/service.ts",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/server": "2.0.0",
+    "@tldraw/store": "4.5.9",
+    "@tldraw/sync": "4.5.9",
+    "@tldraw/sync-core": "4.5.9",
+    "@tldraw/utils": "4.5.9",
+    "tslib": "^2.8.1",
+    "ws": "^8.18.0",
+    "zod": "^4.4.3"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.0",
+    "@types/react": "19.2.17",
+    "@types/react-dom": "19.2.3",
+    "@types/ws": "^8.5.13",
+    "@vitejs/plugin-react": "6.0.3",
+    "react": "19.2.7",
+    "react-dom": "19.2.7",
+    "tldraw": "4.5.9",
+    "typescript": "^5.7.2",
+    "vite": "8.1.0",
+    "vitest": "^4.1.11"
+  },
+  "publishConfig": {
+    "access": "public"
+  }
+}
