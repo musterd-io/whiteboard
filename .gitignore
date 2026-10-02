@@ -2,3 +2,7 @@ node_modules/
 dist/
 dist-web/
 *.tgz
+*.tsbuildinfo
+coverage/
+.DS_Store
+*.log
