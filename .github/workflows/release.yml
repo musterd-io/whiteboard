@@ -1,0 +1,35 @@
+name: release
+# Publishes @musterd/whiteboard to npm through trusted publishing (OIDC): no npm token is
+# stored anywhere. npm accepts the publish only from this workflow file, in this repo, in the
+# `npm` environment — the trust relationship set with `npm trust github`.
+#
+# To release: bump "version" in package.json on main, then push a matching tag:
+#   git tag v0.1.1 && git push origin v0.1.1
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+  id-token: write # the OIDC token npm exchanges for a one-time publish credential
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment: npm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      # Trusted publishing needs npm 11.5.1 or newer; Node 22 bundles 10.x.
+      - run: npm install -g npm@^11.15.0
+      - name: the tag names the version being published
+        run: |
+          want="v$(node -p "require('./package.json').version")"
+          if [ "$GITHUB_REF_NAME" != "$want" ]; then
+            echo "tag $GITHUB_REF_NAME does not match package.json ($want)"; exit 1
+          fi
+      - run: npm ci
+      - run: npm audit --omit=dev --audit-level=high
+      # prepublishOnly builds and runs the tests; provenance is attached automatically.
+      - run: npm publish
