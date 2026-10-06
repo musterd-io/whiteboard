@@ -96,13 +96,13 @@ npm test        # includes the live Squig test and extraction.test.ts
 ## Releasing
 
 Releases publish from GitHub Actions through npm's trusted publishing, so no npm token exists
-anywhere. Bump \`version\` in \`package.json\` on \`main\`, then push a matching tag:
+anywhere. Bump `version` in `package.json` on `main`, then push a matching tag:
 
-\`\`\`sh
+```sh
 git tag v0.1.1 && git push origin v0.1.1
-\`\`\`
+```
 
-[\`release.yml\`](.github/workflows/release.yml) checks that the tag matches the version, then
+[`release.yml`](.github/workflows/release.yml) checks that the tag matches the version, then
 builds, tests and publishes with provenance.
 
 ## Credits and licenses
