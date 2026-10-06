@@ -13,12 +13,9 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 
 const PKG_ROOT = fileURLToPath(new URL('..', import.meta.url));
-/** Each config file with how deep its paths resolve from: vite.config.ts sets `root: 'web'`, so its
- *  `../dist-web` is still inside the package. */
+/** Each config file with how deep its paths resolve from. */
 const CONFIG_DEPTH: Record<string, number> = {
   'tsconfig.json': 0,
-  'web/tsconfig.json': 1,
-  'vite.config.ts': 1,
   'vitest.config.ts': 0,
 };
 const CONFIG_FILES = Object.keys(CONFIG_DEPTH);
@@ -36,7 +33,6 @@ async function sourceFiles(dir: string): Promise<string[]> {
 async function allCode(): Promise<string[]> {
   return [
     ...(await sourceFiles(join(PKG_ROOT, 'src'))),
-    ...(await sourceFiles(join(PKG_ROOT, 'web', 'src'))),
     ...CONFIG_FILES.filter((f) => f.endsWith('.ts')).map((f) => join(PKG_ROOT, f)),
   ];
 }
@@ -98,6 +94,14 @@ describe('extraction guarantee', () => {
         if (builtins.has(name)) continue;
         expect(declared.has(name), `${file} imports undeclared ${name}`).toBe(true);
       }
+    }
+  });
+
+  it('every command the package declares runs under node — a bin without a shebang is a shell script', async () => {
+    const pkg = (await manifest()) as unknown as { bin: Record<string, string> };
+    for (const [name, target] of Object.entries(pkg.bin)) {
+      const src = join(PKG_ROOT, target.replace(/^\.\/dist\//, 'src/').replace(/\.js$/, '.ts'));
+      expect((await readFile(src, 'utf8')).split('\n')[0], name).toBe('#!/usr/bin/env node');
     }
   });
 });
