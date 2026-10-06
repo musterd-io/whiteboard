@@ -12,6 +12,18 @@ export const WHITEBOARD_TOOL_NAMES = [
   'whiteboard_edit',
   'whiteboard_close',
   'whiteboard_list',
+  // Squig's own tools, on any board (ADR 527).
+  'whiteboard_document',
+  'whiteboard_draw',
+  'whiteboard_replace',
+  'whiteboard_render',
+  'whiteboard_export',
+  'whiteboard_measure_text',
+  'whiteboard_catalog',
+  'whiteboard_comment',
+  'whiteboard_resolve_comment',
+  'whiteboard_history',
+  'whiteboard_restore',
 ] as const;
 
 export type WhiteboardToolName = (typeof WHITEBOARD_TOOL_NAMES)[number];

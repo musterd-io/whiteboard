@@ -1,6 +1,6 @@
 ---
 name: whiteboard-brainstorm
-description: Facilitate a live brainstorm on a shared whiteboard the human draws on with you. Use when someone wants to brainstorm, ideate, explore options, think spatially, or cluster many ideas — and a canvas would carry it better than chat alone. Opens a tldraw board via the whiteboard_* MCP tools; both parties draw; you facilitate.
+description: Facilitate a live brainstorm on a shared whiteboard the human draws on with you. Use when someone wants to brainstorm, ideate, explore options, think spatially, or cluster many ideas — and a canvas would carry it better than chat alone. Opens a Squig board via the whiteboard_* MCP tools; both parties draw; you facilitate.
 ---
 
 # Whiteboard brainstorm
@@ -10,14 +10,14 @@ technique kept invisible, converging late. The board is a shared thinking surfac
 draws on it in their browser while you place and arrange ideas through the tools, and both of
 you see every change live.
 
-This file is the canonical skill and travels with the `@musterd/whiteboard` package
+This file is the canonical skill and travels with the `agent-whiteboard` package
 (harness-agnostic). The musterd-specific mechanics are marked as such — drop them when using
 this outside a musterd team.
 
 ## Tools
 
-Six `whiteboard_*` tools from the `@musterd/whiteboard` MCP server (it starts the board service
-itself when needed):
+The agent-whiteboard MCP server (it starts the board service itself when needed). Six
+brainstorm tools:
 
 - `whiteboard_open {board, seat}` — open/reopen a named board. **Call first**: `seat` is what
   attributes your shapes. Hand the human the returned URL.
@@ -31,6 +31,15 @@ itself when needed):
 - `whiteboard_close {board}` — persist, unload, get the final outline.
 - `whiteboard_list` — boards on disk (they survive across sessions — a brainstorm that spans
   days is ONE board).
+
+On a Squig board the same server also carries Squig's own tools, each taking `board` and
+`args` (Squig's arguments, passed through): `whiteboard_document`, `whiteboard_draw`,
+`whiteboard_replace`, `whiteboard_render` (a PNG comes back as an image — look at the board),
+`whiteboard_export`, `whiteboard_measure_text`, `whiteboard_catalog`, `whiteboard_comment`,
+`whiteboard_resolve_comment`, `whiteboard_history`, `whiteboard_restore`. Reach for them when a
+brainstorm turns into a wireframe; the brainstorm tools above stay the way to run the
+session. A workspace can link a board name to its own file — in musterd, `team` is the repo's
+`docs/wireframes/team.squig.json` (the `squig` skill covers wireframing on it).
 
 ## Session flow
 

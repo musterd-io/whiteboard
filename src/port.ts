@@ -3,7 +3,7 @@
  *
  * Vocabulary is the brainstorm's, never the canvas library's: a *note* (an idea), a *label*
  * (an annotation), a *link* (a directed relation A → B), a *cluster* (a named grouping).
- * Nothing above the adapter may mention a tldraw record. Swapping canvas providers later
+ * Nothing above the adapter may mention a canvas library's record. Swapping canvas providers later
  * means writing one new adapter against this file and touching nothing else.
  */
 
@@ -32,7 +32,7 @@ export interface NoteInput {
   text: string;
   /** The full thought. Not drawn on the canvas; comes back on every read. */
   detail?: string;
-  /** tldraw-ish color name; providers map or ignore. */
+  /** A color name (yellow, blue, …); providers map or ignore. */
   color?: string;
   /** Place inside this cluster (outline id of a cluster). */
   cluster?: string;
