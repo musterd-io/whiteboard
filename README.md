@@ -1,4 +1,4 @@
-# musterd-whiteboard
+# @musterd/whiteboard
 
 A shared whiteboard for a person and an agent to brainstorm on. You draw in the
 browser, in [Squig](https://github.com/pablostanley/squig)'s editor. The agent

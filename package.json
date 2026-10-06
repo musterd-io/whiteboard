@@ -5,11 +5,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SandRiseStudio/musterd-whiteboard.git"
+    "url": "git+https://github.com/musterd-io/whiteboard.git"
   },
-  "homepage": "https://github.com/SandRiseStudio/musterd-whiteboard#readme",
+  "homepage": "https://github.com/musterd-io/whiteboard#readme",
   "bugs": {
-    "url": "https://github.com/SandRiseStudio/musterd-whiteboard/issues"
+    "url": "https://github.com/musterd-io/whiteboard/issues"
   },
   "keywords": [
     "mcp",
